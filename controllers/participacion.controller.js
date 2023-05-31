@@ -22,7 +22,7 @@ controller.getListaParticipacionbyObra = async (req, res) => {
     "GET /participaciones/lista/:obra - Obteniendo la lista de participaciones de una obra"
   );
   const { obra: OBRA } = req.params;
-  const query = `SELECT E.CODESTUDIANTE, E.NOMBRE, E.APELLIDO FROM ESTUDIANTE E, CONVOCATORIAESTUDIANTE C, OBRA O WHERE E.CODESTUDIANTE = C.CODESTUDIANTE AND C.IDOBRA = O.IDOBRA AND O.IDOBRA = ${OBRA}`;
+  const query = `SELECT P.CONSECASIS, E.CODESTUDIANTE, E.NOMBRE, E.APELLIDO, E.CORREO, P.IDOBRA, P.IDTIPOCALEN, P.CONSECALENDARIO FROM PARTICIPACIONESTUDIANTE P, ESTUDIANTE E WHERE P.CODESTUDIANTE = E.CODESTUDIANTE AND P.IDOBRA = ${OBRA}`;
   const response = await utilities.executeQuery(query);
   if (response.error) {
     res.status(500).json(response);

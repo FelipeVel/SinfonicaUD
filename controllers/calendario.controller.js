@@ -27,8 +27,15 @@ controller.getCalendario = async (req, res) => {
 
 controller.createCalendario = async (req, res) => {
   console.log("POST /calendarios - Creando un calendario");
-  const { IDOBRA, IDTIPOCALEN, CONSECALENDARIO, IDESTADO, FECHAINICIO, FECHAFIN } = req.body;
-  const query = `INSERT INTO CALENDARIO (IDOBRA, IDTIPOCALEN, CONSECALENDARIO, IDESTADO, FECHAINICIO, FECHAFIN) VALUES (${IDOBRA}, ${IDTIPOCALEN}, ${CONSECALENDARIO}, ${IDESTADO}, '${FECHAINICIO}', '${FECHAFIN}')`;
+  const { IDOBRA, IDTIPOCALEN, IDESTADO, FECHAINICIO, FECHAFIN } = req.body;
+  const nextIdQuery = "SELECT MAX(CONSECALENDARIO) + 1 AS NEXTID FROM CALENDARIO";
+  const nextIdResponse = await utilities.executeQuery(nextIdQuery);
+  if (nextIdResponse.error) {
+    res.status(500).json(nextIdResponse);
+    return;
+  }
+  const nextId = nextIdResponse.NEXTID;
+  const query = `INSERT INTO CALENDARIO (IDOBRA, IDTIPOCALEN, CONSECALENDARIO, IDESTADO, FECHAINICIO, FECHAFIN) VALUES (${IDOBRA}, ${IDTIPOCALEN}, ${nextId}, ${IDESTADO}, TO_DATE('${FECHAINICIO}','YYYY-MM-DD HH24:MI:SS'), TO_DATE('${FECHAFIN}','YYYY-MM-DD HH24:MI:SS'))`;
   const response = await utilities.executeQuery(query);
   if (response.error) {
     res.status(500).json(response);

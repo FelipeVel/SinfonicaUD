@@ -6,14 +6,15 @@ controller.getLiquidacionesViaticos = async (req, res) => {
     "GET /liquidaciones/viaticos - Obteniendo todas las liquidaciones de viaticos"
   );
   const { periodo: IDPERIODO } = req.params;
-  const query = `SELECT P.IDPERIODO, E.NOMBRE, E.APELLIDO, E.CEDULA, E.CODUNIDAD, U.NOMUNIDAD, LPO.NOHORAS 
+  const query = `SELECT P.IDPERIODO, E.CODEMPLEADO, E.NOMBRE, E.APELLIDO, E.CEDULA, E.CODUNIDAD, U.NOMUNIDAD, SUM(LPO.NOHORAS) NOHORAS 
                 FROM PERIODO P, OBRA O, PERSONALOBRA PO, LABORPERSONALOBRA LPO, UNIDAD U, EMPLEADO E 
                 WHERE P.IDPERIODO = ${IDPERIODO} 
                     AND P.IDPERIODO = O.IDPERIODO 
                     AND O.IDOBRA = PO.IDOBRA 
                     AND PO.IDPERSONALOBRA = LPO.IDPERSONALOBRA 
                     AND PO.CODEMPLEADO = E.CODEMPLEADO 
-                    AND E.CODUNIDAD = U.CODUNIDAD`;
+                    AND E.CODUNIDAD = U.CODUNIDAD
+                GROUP BY P.IDPERIODO, E.CODEMPLEADO, E.NOMBRE, E.APELLIDO, E.CEDULA, E.CODUNIDAD, U.NOMUNIDAD, LPO.NOHORAS`;
   const response = await utilities.executeQuery(query);
   if (response.error) {
     res.status(500).json(response);

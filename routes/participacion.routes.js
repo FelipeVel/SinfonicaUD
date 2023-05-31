@@ -32,6 +32,33 @@ router.get('/:obra', participacionController.getParticipacionesbyObra);
 
 /**
  * @openapi
+ * /participaciones/lista/{obra}:
+ *   get:
+ *     tags:
+ *       - Participaciones
+ *     summary: Obtener la lista de participaciones de una obra
+ *     parameters:
+ *       - in: path
+ *         name: obra
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID de la obra
+ *     responses:
+ *       200:
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/ListaParticipacion'
+ */
+
+router.get('/lista/:obra', participacionController.getListaParticipacionbyObra);
+
+/**
+ * @openapi
  * /participaciones:
  *   post:
  *     tags:
