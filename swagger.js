@@ -265,6 +265,43 @@ const swaggerOptions = {
                         }
                     }
                 },
+                Obra: {
+                    type: "object",
+                    properties: {
+                        IDOBRA: {
+                            type: "string",
+                            example: "1"
+                        },
+                        IDCOMPOSITOR: {
+                            type: "string",
+                            example: "1"
+                        },
+                        IDCODPAIS: {
+                            type: "string",
+                            example: "1"
+                        },
+                        IDGENEROOBRA: {
+                            type: "string",
+                            example: "1"
+                        },
+                        IDPERIODO: {
+                            type: "integer",
+                            example: 1
+                        },
+                        FECHAOBRA: {
+                            type: "string",
+                            example: "2023-02-01 05:00:00"
+                        },
+                        TITULO: {
+                            type: "string",
+                            example: "Titulo de prueba"
+                        },
+                        ESTADO: {
+                            type: "string",
+                            example: "ACTIVO"
+                        }
+                    }
+                },
                 OkInsert: {
                     type: "object",
                     properties: {

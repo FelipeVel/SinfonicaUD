@@ -23,6 +23,7 @@ app.use('/empleados', require('./routes/empleado.routes'));
 app.use('/actividades', require('./routes/actividad.routes'));
 app.use('/liquidaciones', require('./routes/liquidacion.routes'));
 app.use('/participaciones', require('./routes/participacion.routes'));
+app.use('/obras', require('./routes/obra.routes'));
 
 
 app.listen(puerto, err => {
