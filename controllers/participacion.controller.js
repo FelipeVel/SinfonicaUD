@@ -5,8 +5,16 @@ controller.getParticipacionesbyObra = async (req, res) => {
   console.log(
     "GET /participaciones/:obra - Obteniendo todas las participaciones de una obra"
   );
-  const { obra: OBRA } = req.params;
-  const query = `SELECT P.CONSECASIS, P.IDOBRA, P.IDTIPOCALEN, P.CONSECALENDARIO, E.CODESTUDIANTE, E.CODUNIDAD, E.NOMBRE, E.APELLIDO, E.FECHAINSCRIPCION, E.FECHANACIMIENTO, E.CORREO FROM PARTICIPACIONESTUDIANTE P, ESTUDIANTE E WHERE IDOBRA = ${OBRA} AND P.CODESTUDIANTE = E.CODESTUDIANTE`;
+  const { obra: IDOBRA } = req.params;
+  const query = `SELECT IDOBRA, CONSECALENDARIO, CODESTUDIANTE, NOMBRE, APELLIDO, CORREO
+  FROM (
+    SELECT P.IDOBRA, P.CONSECALENDARIO, E.CODESTUDIANTE, E.NOMBRE, E.APELLIDO, E.CORREO, 
+           ROW_NUMBER() OVER(PARTITION BY E.CODESTUDIANTE ORDER BY P.IDOBRA) AS RN
+    FROM PARTICIPACIONESTUDIANTE P, ESTUDIANTE E
+    WHERE P.CODESTUDIANTE = E.CODESTUDIANTE
+      AND P.IDOBRA = ${IDOBRA}
+  )
+  WHERE RN = 1`;
   const response = await utilities.executeQuery(query);
   if (response.error) {
     res.status(500).json(response);
@@ -36,8 +44,17 @@ controller.saveListaParticipacion = async (req, res) => {
     res.status(400).json({ error: "No se han enviado participaciones" });
     return;
   }
+  const lastRowId = await utilities.executeQuery(
+    "SELECT MAX(CONSECASIS) AS CONSECASIS FROM PARTICIPACIONESTUDIANTE"
+  );
+  if (lastRowId.error) {
+    res.status(500).json(lastRowId);
+    return;
+  }
+  let { CONSECASIS } = lastRowId;
   idEstudiantes.forEach(async (estudiante) => {
-    const query = `INSERT INTO PARTICIPACIONESTUDIANTE (CODESTUDIANTE, IDOBRA, IDTIPOCALEN, CONSECALENDARIO) VALUES (${estudiante}, ${idObra}, ${idTipoCalen}, ${conseCalendario})`;
+    CONSECASIS++;
+    const query = `INSERT INTO PARTICIPACIONESTUDIANTE (CONSECASIS, CODESTUDIANTE, IDOBRA, IDTIPOCALEN, CONSECALENDARIO) VALUES (${CONSECASIS}, '${estudiante}', '${idObra}', '${idTipoCalen}', ${conseCalendario})`;
     const response = await utilities.executeQuery(query);
     if (response.error) {
       res.status(500).json(response);

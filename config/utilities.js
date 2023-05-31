@@ -29,7 +29,7 @@ utilities.executeQuery = async (query) => {
       {},
       { outFormat: oracledb.OUT_FORMAT_OBJECT }
     );
-    console.log("Resultados obtenidos de la BD: ", result);
+    /* console.log("Resultados obtenidos de la BD: ", result); */
     console.log("Desconectando de la base de datos");
     await utilities.doRelease(connection);
     console.log("--------------------------------------------------\n");

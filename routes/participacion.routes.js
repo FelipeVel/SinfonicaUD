@@ -4,11 +4,18 @@ const participacionController = require('../controllers/participacion.controller
 
 /**
  * @openapi
- * /participaciones:
+ * /participaciones/{obra}:
  *   get:
  *     tags:
  *       - Participaciones
- *     summary: Obtener todas las participaciones
+ *     summary: Obtener todas las participaciones de una obra
+ *     parameters:
+ *       - in: path
+ *         name: obra
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID de la obra
  *     responses:
  *       200:
  *         description: OK
@@ -19,6 +26,7 @@ const participacionController = require('../controllers/participacion.controller
  *               items:
  *                 $ref: '#/components/schemas/ParticipacionObra'
  */
+
 
 router.get('/:obra', participacionController.getParticipacionesbyObra);
 

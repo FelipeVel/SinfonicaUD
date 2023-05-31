@@ -31,7 +31,7 @@ router.get("/", estudianteController.getEstudiantes);
  *     summary: Obtener todos los estudiantes por instrumento
  *     parameters:
  *       - in: path
- *         name: instrumento
+ *         name: idInstrumento
  *         schema:
  *           type: string
  *         required: true
