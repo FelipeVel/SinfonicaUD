@@ -24,7 +24,7 @@ controller.getInstrumento = async (req, res) => {
   res.json(response);
 };
 
-controller.saveInstrumento = async (req, res) => {
+controller.createInstrumento = async (req, res) => {
   console.log("POST /instrumentos - Guardando un instrumento");
   const { nombre, descripcion } = req.body;
   const query = `INSERT INTO INSTRUMENTO (NOMBRE, DESCRIPCION) VALUES ('${nombre}', '${descripcion}')`;
