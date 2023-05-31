@@ -302,6 +302,19 @@ const swaggerOptions = {
                         }
                     }
                 },
+                Instrumento: {
+                    type: "object",
+                    properties: {
+                        IDINSTRUMENTO: {
+                            type: "string",
+                            example: "1"
+                        },
+                        NOMINSTRUMENTO: {
+                            type: "string",
+                            example: "Nombre de prueba"
+                        },
+                    }
+                },
                 OkInsert: {
                     type: "object",
                     properties: {

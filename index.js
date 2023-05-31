@@ -24,6 +24,7 @@ app.use('/actividades', require('./routes/actividad.routes'));
 app.use('/liquidaciones', require('./routes/liquidacion.routes'));
 app.use('/participaciones', require('./routes/participacion.routes'));
 app.use('/obras', require('./routes/obra.routes'));
+app.use('/instrumentos', require('./routes/instrumento.routes'));
 
 
 app.listen(puerto, err => {
