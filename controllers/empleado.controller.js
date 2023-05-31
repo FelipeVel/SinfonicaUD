@@ -5,7 +5,7 @@ const controller = {};
 controller.getEmpleados = async (req, res) => {
   console.log("GET /empleados - Obteniendo todos los empleados");
   const query = "SELECT * FROM EMPLEADO";
-  const response = await utilities.executeSQL(query);
+  const response = await utilities.executeQuery(query);
   if (response.error) {
     res.status(500).json(response);
     return;
@@ -23,7 +23,7 @@ controller.getEmpleado = async (req, res) => {
     codEmpleado: CODEMPLEADO,
   } = req.params;
   const query = `SELECT * FROM EMPLEADO WHERE ROL_PK = ${ROL_PK} AND CODUNIDAD = '${CODUNIDAD}' AND CODEMPLEADO = '${CODEMPLEADO}'`;
-  const response = await utilities.executeSQL(query);
+  const response = await utilities.executeQuery(query);
   if (response.error) {
     res.status(500).json(response);
     return;
@@ -44,7 +44,7 @@ controller.createEmpleado = async (req, res) => {
         CORREO
     } = req.body;
     const query = `INSERT INTO EMPLEADO (ROL_PK, CODUNIDAD, CODEMPLEADO, NOMBRE, APELLIDO, CEDULA, CELULAR, CORREO) VALUES (${ROL_PK}, '${CODUNIDAD}', '${CODEMPLEADO}', '${NOMBRE}', '${APELLIDO}', '${CEDULA}', '${CELULAR}', '${CORREO}')`;
-    const response = await utilities.executeSQL(query);
+    const response = await utilities.executeQuery(query);
     if (response.error) {
         res.status(500).json(response);
         return;
@@ -87,7 +87,7 @@ controller.updateEmpleado = async (req, res) => {
         return;
     }
     const query = `UPDATE EMPLEADO SET ${updateString.join(", ")} WHERE ROL_PK = ${ROL_PK} AND CODUNIDAD = '${CODUNIDAD}' AND CODEMPLEADO = '${CODEMPLEADO}'`;
-    const response = await utilities.executeSQL(query);
+    const response = await utilities.executeQuery(query);
     if (response.error) {
         res.status(500).json(response);
         return;
@@ -103,7 +103,7 @@ controller.deleteEmpleado = async (req, res) => {
         codEmpleado: CODEMPLEADO
     } = req.params;
     const query = `DELETE FROM EMPLEADO WHERE ROL_PK = ${ROL_PK} AND CODUNIDAD = ${CODUNIDAD} AND CODEMPLEADO = ${CODEMPLEADO}`;
-    const response = await utilities.executeSQL(query);
+    const response = await utilities.executeQuery(query);
     if (response.error) {
         res.status(500).json(response);
         return;

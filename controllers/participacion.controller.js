@@ -6,7 +6,7 @@ controller.getParticipacionesbyObra = async (req, res) => {
     "GET /participaciones/:obra - Obteniendo todas las participaciones de una obra"
   );
   const { obra: OBRA } = req.params;
-  const query = `SELECT * FROM PARTICIPACIONESTUDIANTE WHERE IDOBRA = ${OBRA}`;
+  const query = `SELECT P.CONSECASIS, P.IDOBRA, P.IDTIPOCALEN, P.CONSECALENDARIO, E.CODESTUDIANTE, E.CODUNIDAD, E.NOMBRE, E.APELLIDO, E.FECHAINSCRIPCION, E.FECHANACIMIENTO, E.CORREO FROM PARTICIPACIONESTUDIANTE P, ESTUDIANTE E WHERE IDOBRA = ${OBRA} AND P.CODESTUDIANTE = E.CODESTUDIANTE`;
   const response = await utilities.executeQuery(query);
   if (response.error) {
     res.status(500).json(response);
@@ -44,6 +44,7 @@ controller.saveListaParticipacion = async (req, res) => {
       return;
     }
   });
+  res.json({ message: "Participaciones guardadas" });
 };
 
 module.exports = controller;

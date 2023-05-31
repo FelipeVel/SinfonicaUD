@@ -24,7 +24,7 @@ controller.getLiquidacionesViaticos = async (req, res) => {
 
 controller.getLiquidacionesElectivas = async (req, res) => {
     console.log("GET /liquidaciones/electivas - Obteniendo lista de estudiantes con horas asistidas");
-    const query = `SELECT CODESTUDIANTE, COUNT(CONSECASIS) HORASASISTIDAS FROM PARTICIPACIONESTUDIANTE GROUP BY CODESTUDIANTE`;
+    const query = `SELECT E.CODESTUDIANTE, E.NOMBRE, E.APELLIDO, COUNT(P.CONSECASIS) HORASASISTIDAS FROM PARTICIPACIONESTUDIANTE P, ESTUDIANTE E WHERE P.CODESTUDIANTE = E.CODESTUDIANTE GROUP BY E.CODESTUDIANTE, E.NOMBRE, E.APELLIDO ORDER BY E.CODESTUDIANTE ASC`;
     const response = await utilities.executeQuery(query);
     if (response.error) {
         res.status(500).json(response);
