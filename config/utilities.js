@@ -33,7 +33,11 @@ utilities.executeQuery = async (query) => {
     console.log("Desconectando de la base de datos");
     await utilities.doRelease(connection);
     console.log("--------------------------------------------------\n");
-    return result.rows;
+    return result.rows ? 
+      result.rows.length !== 1 ? 
+        result.rows 
+        : result.rows[0] 
+    : {...result, response: "OK"};
   } catch (err) {
     console.error("Error ejecutando el query: ", err.message);
     console.log("--------------------------------------------------\n");

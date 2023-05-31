@@ -35,17 +35,20 @@ router.get('/:obra', participacionController.getParticipacionesbyObra);
  *           schema:
  *             $ref: '#/components/schemas/ListaParticipacion'
  *     responses:
- *       200:
- *         description: OK
+ *       201:
+ *         description: Created
  *         content:
  *           application/json:
  *             schema:
- *               ResReporteParticipacion:
- *                 type: object
- *                 properties:
- *                   message:
- *                     type: string
- *                     example: Participaciones guardadas
+ *               $ref: '#/components/schemas/OkInsert'
+ *       400:
+ *         description: Bad Request
+ *       404:
+ *         description: Not Found
+ *       409:
+ *         description: Conflict
+ *       500:
+ *         description: Internal Server Error
  */
 
 

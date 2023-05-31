@@ -55,11 +55,11 @@ const swaggerOptions = {
                         },
                         FECHAINICIO: {
                             type: "string",
-                            example: "2021-01-01"
+                            example: "2023-02-01 05:00:00"
                         },
                         FECHAFIN: {
                             type: "string",
-                            example: "2021-01-01"
+                            example: "2023-02-01 05:00:00"
                         }
                     }
                 },
@@ -121,11 +121,11 @@ const swaggerOptions = {
                         },
                         FECHAINSCRIPCION: {
                             type: "string",
-                            example: "2021-01-01"
+                            example: "2023-02-01 05:00:00"
                         },
                         FECHANACIMIENTO: {
                             type: "string",
-                            example: "2021-01-01"
+                            example: "2023-02-01 05:00:00"
                         },
                         CORREO: {
                             type: "string",
@@ -228,11 +228,11 @@ const swaggerOptions = {
                             },
                             FECHAINSCRIPCION: {
                                 type: "string",
-                                example: "2021-01-01"
+                                example: "2023-02-01 05:00:00"
                             },
                             FECHANACIMIENTO: {
                                 type: "string",
-                                example: "2021-01-01"
+                                example: "2023-02-01 05:00:00"
                             },
                             CORREO: {
                                 type: "string",
@@ -262,6 +262,23 @@ const swaggerOptions = {
                         conseCalendario: {
                             type: "integer",
                             example: 1
+                        }
+                    }
+                },
+                OkInsert: {
+                    type: "object",
+                    properties: {
+                        lastRowId: {
+                            type: "string",
+                            example: "AAAAAAAAAAAAAAAAAAAAAA"
+                        },
+                        rowsAffected: {
+                            type: "integer",
+                            example: 1
+                        },
+                        response: {
+                            type: "string",
+                            example: "OK"
                         }
                     }
                 }

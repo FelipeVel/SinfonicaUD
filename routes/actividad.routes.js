@@ -92,16 +92,18 @@ router.get("/mes/:mes", actividadController.getActividadesbyMes);
  *           schema:
  *             $ref: '#/components/schemas/Actividad'
  *     responses:
- *       200:
- *         description: OK
+ *       201:
+ *         description: Created
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Actividad'
+ *               $ref: '#/components/schemas/OkInsert'
  *       400:
  *         description: Bad Request
  *       404:
  *         description: Not Found
+ *       409:
+ *         description: Conflict
  *       500:
  *         description: Internal Server Error
  */

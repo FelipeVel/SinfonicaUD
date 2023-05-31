@@ -72,16 +72,18 @@ router.get('/:idObra/:idTipoCalen/:conseCalendario', calendarioController.getCal
  *           schema:
  *             $ref: '#/components/schemas/Calendario'
  *     responses:
- *       200:
- *         description: OK
+ *       201:
+ *         description: Created
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Calendario'
+ *               $ref: '#/components/schemas/OkInsert'
  *       400:
  *         description: Bad Request
  *       404:
  *         description: Not Found
+ *       409:
+ *         description: Conflict
  *       500:
  *         description: Internal Server Error
  */

@@ -4,7 +4,7 @@ const liquidacionController = require('../controllers/liquidacion.controller');
 
 /**
  * @openapi
- * /liquidaciones/{periodo}:
+ * /liquidaciones/viaticos/{periodo}:
  *   get:
  *     tags:
  *       - Liquidaciones
@@ -31,7 +31,7 @@ router.get('/viaticos/:periodo', liquidacionController.getLiquidacionesViaticos)
 
 /**
  * @openapi
- * /liquidaciones/{periodo}:
+ * /liquidaciones/electivas:
  *   get:
  *     tags:
  *       - Liquidaciones

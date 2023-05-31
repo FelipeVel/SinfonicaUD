@@ -6,7 +6,7 @@ controller.getLiquidacionesViaticos = async (req, res) => {
     "GET /liquidaciones/viaticos - Obteniendo todas las liquidaciones de viaticos"
   );
   const { periodo: IDPERIODO } = req.params;
-  const query = `SELECT P.IDPERIODO, E.NOMBRE, E.APELLIDO, E.CEDULA, E.CODUNIDAD, U.NOMUNIDAD, L.NOHORAS 
+  const query = `SELECT P.IDPERIODO, E.NOMBRE, E.APELLIDO, E.CEDULA, E.CODUNIDAD, U.NOMUNIDAD, LPO.NOHORAS 
                 FROM PERIODO P, OBRA O, PERSONALOBRA PO, LABORPERSONALOBRA LPO, UNIDAD U, EMPLEADO E 
                 WHERE P.IDPERIODO = ${IDPERIODO} 
                     AND P.IDPERIODO = O.IDPERIODO 

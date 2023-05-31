@@ -72,16 +72,20 @@ router.get('/:rolPk/:codUnidad/:codEmpleado', empleadoController.getEmpleado);
  *           schema:
  *             $ref: '#/components/schemas/Empleado'
  *     responses:
- *       200:
- *         description: OK
+ *       201:
+ *         description: Created
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Empleado'
+ *               $ref: '#/components/schemas/OkInsert'
  *       400:
  *         description: Bad Request
+ *       404:
+ *         description: Not Found
+ *       409:
+ *         description: Conflict
  *       500:
- *         description: Error interno
+ *         description: Internal Server Error
  */
 
 router.post('/', empleadoController.createEmpleado);

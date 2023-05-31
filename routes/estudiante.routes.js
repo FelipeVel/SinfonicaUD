@@ -24,7 +24,7 @@ router.get("/", estudianteController.getEstudiantes);
 
 /**
  * @openapi
- * /estudiantes/instrumento/{instrumento}:
+ * /estudiantes/instrumento/{idInstrumento}:
  *   get:
  *     tags:
  *       - Estudiantes
@@ -48,7 +48,7 @@ router.get("/", estudianteController.getEstudiantes);
  */
 
 router.get(
-  "/instrumento/:INSTRUMENTO",
+  "/instrumento/:idInstrumento",
   estudianteController.getEstudiantesbyInstrumento
 );
 
@@ -95,7 +95,7 @@ router.get("/:codEstudiante", estudianteController.getEstudiante);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Estudiante'
+ *               $ref: '#/components/schemas/OkInsert'
  *       400:
  *         description: Bad Request
  *       404:
