@@ -6,15 +6,9 @@ controller.getParticipacionesbyObra = async (req, res) => {
     "GET /participaciones/:obra - Obteniendo todas las participaciones de una obra"
   );
   const { obra: IDOBRA } = req.params;
-  const query = `SELECT IDOBRA, CONSECALENDARIO, CODESTUDIANTE, NOMBRE, APELLIDO, CORREO
-  FROM (
-    SELECT P.IDOBRA, P.CONSECALENDARIO, E.CODESTUDIANTE, E.NOMBRE, E.APELLIDO, E.CORREO, 
-           ROW_NUMBER() OVER(PARTITION BY E.CODESTUDIANTE ORDER BY P.IDOBRA) AS RN
-    FROM PARTICIPACIONESTUDIANTE P, ESTUDIANTE E
-    WHERE P.CODESTUDIANTE = E.CODESTUDIANTE
-      AND P.IDOBRA = ${IDOBRA}
-  )
-  WHERE RN = 1`;
+  const query = `SELECT O.IDOBRA, E.CODESTUDIANTE, E.NOMBRE, E.APELLIDO, E.CORREO
+  FROM OBRA O, CONVOCATORIAESTUDIANTE C, ESTUDIANTE E
+  WHERE O.IDOBRA = C.IDOBRA AND C.CODESTUDIANTE = E.CODESTUDIANTE AND O.IDOBRA = ${IDOBRA}`;
   const response = await utilities.executeQuery(query);
   if (response.error) {
     res.status(500).json(response);
