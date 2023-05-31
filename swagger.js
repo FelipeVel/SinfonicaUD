@@ -298,7 +298,7 @@ const swaggerOptions = {
                         },
                         ESTADO: {
                             type: "string",
-                            example: "ACTIVO"
+                            example: "1"
                         }
                     }
                 },
